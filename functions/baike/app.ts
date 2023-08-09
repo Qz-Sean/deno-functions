@@ -37,7 +37,8 @@ async function handleRequest(request: Request) {
     }
   }
 
-  return await fetchReadmeToHtml(import.meta.url)
+  // return await fetchReadmeToHtml(import.meta.url)
+  return Response.redirect('https://gakki.icu', 301)
 }
 
 serve(handleRequest, { port: PORT })
