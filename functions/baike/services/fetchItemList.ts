@@ -22,7 +22,10 @@ const itemListCache = new Map<string, BaikeItem>()
 
 export const getItemList = async (inputItem: string) => {
   if (itemListCache.has(inputItem)) {
-    return itemListCache.get(inputItem) as BaikeItem
+    cosnt item = itemListCache.get(inputItem)
+    if (item.list.length > 1){
+      return itemListCache.get(inputItem) as BaikeItem
+    }
   }
 
   const currentLink = await fetchItemLink(inputItem)
