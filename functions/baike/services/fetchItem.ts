@@ -10,7 +10,8 @@ interface BaikeItem {
   cover: string
   description: string
   updateTime: string
-  link: string
+  link: string,
+  isComplete: true
 }
 
 const itemCache = new Map<string, BaikeItem>()
@@ -81,15 +82,16 @@ export const fetchItem = async (item: string, n: string | null, encoding = 'json
   const html = await (await fetch(link)).text()
 
   const [itemName, img, desc, url, date] = Regs.map((e) => e.exec(html)?.[1] ?? '')
-
+  
   const itemInfo = {
-    itemName: ensureTitle(itemName),
-    description: desc,
-    cover: img.split('-')[0],
-    link: ensureLink(url, true),
-    updateTime: date,
-  }
-
+  itemName: ensureTitle(itemName),
+  description: desc,
+  cover: img.split('-')[0],
+  link: ensureLink(url, true),
+  updateTime: date,
+  isComplete: desc.lastIndexOf('。') === (desc.length - 1) || false 
+}
+    
   itemCache.set(`${item}-${n || 0}`, itemInfo)
 
   if (encoding === 'text') {
