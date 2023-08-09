@@ -28,10 +28,12 @@ export const fetchItem = async (item: string, n: string | null, encoding = 'json
   if (itemCache.has(`${item}-${n}`)) {
     const itemInfo = itemCache.get(`${item}-${n}`)
     console.warn(itemInfo)
-    if (encoding === 'text') {
-      return new Response(itemInfo?.description)
-    } else {
-      return responseWithBaseRes(itemInfo)
+    if (itemInfo.itemName){
+      if (encoding === 'text') {
+        return new Response(itemInfo?.description)
+      } else {
+        return responseWithBaseRes(itemInfo)
+      }
     }
   }
 
