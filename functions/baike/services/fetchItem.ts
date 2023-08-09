@@ -27,7 +27,7 @@ const Regs = [
 export const fetchItem = async (item: string, n: string | null, encoding = 'json') => {
   if (itemCache.has(`${item}-${n}`)) {
     const itemInfo = itemCache.get(`${item}-${n}`)
-    console.warn(itemInfo)
+    console.warn('itemCache:', itemInfo)
     if (itemInfo.itemName){
       if (encoding === 'text') {
         return new Response(itemInfo?.description)
@@ -93,7 +93,7 @@ export const fetchItem = async (item: string, n: string | null, encoding = 'json
   updateTime: date,
   isComplete: desc.lastIndexOf('。') === (desc.length - 1) || false 
 }
-    
+    console.warn('newItem:', itemInfo)
   itemCache.set(`${item}-${n || 0}`, itemInfo)
 
   if (encoding === 'text') {
