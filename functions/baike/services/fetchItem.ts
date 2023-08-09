@@ -85,7 +85,7 @@ export const fetchItem = async (item: string, n: string | null, encoding = 'json
   
   const itemInfo = {
   itemName: ensureTitle(itemName),
-  description: desc.slice(0, text.lastIndexOf('。') + 1),
+  description: desc.slice(0, desc.lastIndexOf('。') + 1),
   cover: img.split('-')[0],
   link: ensureLink(url, true),
   updateTime: date,
