@@ -87,7 +87,7 @@ export const fetchItem = async (
     let itemName, img, desc, url, date;
     let i = 0;
     const html = await (await fetch(link)).text();
-    console.warn(html.includes(og:description));
+    console.warn(html.includes('og:description'));
     do {
         [itemName, img, desc, url, date] = Regs.map(
             (e) => e.exec(html)?.[1] ?? ""
