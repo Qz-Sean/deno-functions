@@ -80,11 +80,13 @@ export const fetchItem = async (item: string, n: string | null, encoding = 'json
 
     link = linkListInfo.list[Number(n) - 1].link
   }
-
-  const html = await (await fetch(link)).text()
-
-  const [itemName, img, desc, url, date] = Regs.map((e) => e.exec(html)?.[1] ?? '')
-  
+  let itemName, img, desc, url, date
+  let i = 0
+  do {
+    const html = await (await fetch(link)).text()
+    [itemName, img, desc, url, date] = Regs.map((e) => e.exec(html)?.[1] ?? '')
+    i++
+  } while (!itemName && i < 3)
   const itemInfo = {
   itemName: ensureTitle(itemName),
   description: desc.slice(0, desc.lastIndexOf('。') + 1),
