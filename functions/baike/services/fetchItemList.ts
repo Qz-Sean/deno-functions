@@ -22,7 +22,7 @@ const itemListCache = new Map<string, BaikeItem>()
 
 export const getItemList = async (inputItem: string) => {
   if (itemListCache.has(inputItem)) {
-    cosnt item = itemListCache.get(inputItem)
+    const item = itemListCache.get(inputItem)
     if (item.list.length > 1){
       return itemListCache.get(inputItem) as BaikeItem
     }
